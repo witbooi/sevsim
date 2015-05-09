@@ -1,0 +1,7 @@
+serve export . ../sevsim-build
+cd ../sevsim-build
+for file in *.sass
+do
+ mv "$file" "${file%.sass}.css"
+done
+divshot push
