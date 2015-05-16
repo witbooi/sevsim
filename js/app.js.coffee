@@ -19,11 +19,9 @@ class window.App
     for subscriber in @stepSubscribers
       subscriber.call @stepNum
 
-
   start: ->
     @interval = setInterval @makeStep, 500
     @makeStep()
-
 
   stop: ->
     clearInterval @interval
@@ -49,7 +47,6 @@ class window.App
 
   makeActionStep: =>
     deltaMoral = ActionManager.deltas.moral.shift()
-    console.log "Delta Moral: #{deltaMoral}"
     if typeof deltaMoral == 'undefined'
       @moral -= 0.1
     else
@@ -57,6 +54,16 @@ class window.App
 
     @moral = 100 if @moral > 100
     @moral = 0 if @moral < 0
+
+    deltaPain = ActionManager.deltas.pain.shift()
+    if typeof deltaPain == 'undefined'
+      deltaPain = @moral >= 80 ? -1 : -0.2
+      @pain -= deltaPain
+    else
+      @pain += deltaPain
+
+    @pain = 100 if @pain > 100
+    @pain = 0 if @pain < 0
 
 
   updateScores: ->
@@ -66,10 +73,9 @@ class window.App
 
 
   updateChart: ->
-    if @moralChanged or true
-      @chart.series[0].addPoint [@curDate.getTime(), @moral], true, @stepNum > 10
-    if @painChanged
-      @chart.series[1].addPoint [@curDate.getTime(), @pain], true, @stepNum > 10
+    @chart.series[0].addPoint [@curDate.getTime(), @moral], true, @stepNum > 10
+    @chart.series[1].addPoint [@curDate.getTime(), @pain], true, @stepNum > 10
+
     minEx = new Date(@curDate.getTime() - (ONE_DAY * 10))
     maxEx = new Date(@curDate.getTime() + (ONE_DAY * 3))
     @chart.xAxis[0].setExtremes(minEx, maxEx)

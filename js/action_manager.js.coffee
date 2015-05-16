@@ -40,6 +40,7 @@ class window.Action
 
     @deltas         = moral: @dmoral, pain: @dpain
     @deltas.moral = [@deltas.moral] unless @deltas.moral instanceof Array
+    @deltas.pain = [@deltas.pain] unless @deltas.pain instanceof Array
 
 
     @alive          = @available
