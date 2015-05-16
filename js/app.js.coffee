@@ -21,7 +21,6 @@ class window.App
 
 
   start: ->
-    @pendingActions = []
     @interval = setInterval @makeStep, 500
     @makeStep()
 
@@ -37,21 +36,27 @@ class window.App
     @fireStep()
 
     # 1. ActionManager.makeStep
+    @makeActionStep()
+    
     # 2. calculateScores
-    # 3. renderScores
-    # 4. updateChart
-
-    @performAllActions()
     @score += @calculateStepScore()
 
-    for action in actions when action.available is false
-      action.stepsSinceLast += 1
-      if action.stepsSinceLast == action.intervalSteps
-        action.stepsSinceLast = 0
-        action.available = true
-
-    @updateChart()
+    # 3. renderScores
     @updateScores()
+
+    # 4. updateChart
+    @updateChart()
+
+  makeActionStep: =>
+    deltaMoral = ActionManager.deltas.moral.shift()
+    console.log "Delta Moral: #{deltaMoral}"
+    if typeof deltaMoral == 'undefined'
+      @moral -= 0.1
+    else
+      @moral += deltaMoral
+
+    @moral = 100 if @moral > 100
+    @moral = 0 if @moral < 0
 
 
   updateScores: ->
@@ -61,7 +66,7 @@ class window.App
 
 
   updateChart: ->
-    if @moralChanged
+    if @moralChanged or true
       @chart.series[0].addPoint [@curDate.getTime(), @moral], true, @stepNum > 10
     if @painChanged
       @chart.series[1].addPoint [@curDate.getTime(), @pain], true, @stepNum > 10
@@ -70,50 +75,9 @@ class window.App
     @chart.xAxis[0].setExtremes(minEx, maxEx)
 
 
-  stepLog: ->
-    console.log { step: @stepNum, moral: @moral, pain: @pain, score: @score }
-    # console.log [ actions[0].available, actions[0].stepsSinceLast, actions[0].intervalSteps ]
-
-
   calculateStepScore: ->
     @pain * 3
 
-
-  performAllActions: ->
-    oldPain = @pain
-    oldMoral = @moral
-    if @pendingActions.length > 0
-      while action = @pendingActions.pop()
-        @performAction action
-    else
-      @moral -= 0.095
-      @pain  -= 0.15
-
-    if @moral >= 80
-      @pain -= 0.3
-
-    @pain  = 0   if @pain  < 0
-    @moral = 0   if @moral < 0
-    @pain  = 100 if @pain  > 100
-    @moral = 100 if @moral > 100
-
-    @moralChanged = oldMoral != @moral
-    @painChanged = oldPain != @pain
-
-
-
-  performAction: (action) ->
-    @stepLog()
-    console.log "Action performed: #{action.title} dmoral #{action.dmoral} dpain #{action.dpain}"
-    @pain += action.dpain
-    @moral += action.dmoral
-
-    if action.intervalSteps
-      action.available = false
-      action.stepsSinceLast = -1
-
-    @stepLog()
-    console.log @pendingActions
 
 window.ONE_DAY = 86400000
 

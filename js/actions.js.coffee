@@ -21,7 +21,7 @@ window.ActionManager.actions.push new Action(
     id: 'fire-emergency'
     title: 'Уволить скорую помощь'
     dpain: +15
-    dmoral: -5
+    dmoral: [-15, -5, -1, -1]
     available: true
     timesLimit: 1
   )

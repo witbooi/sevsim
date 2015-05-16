@@ -36,7 +36,12 @@ class window.Action
     { @dmoral, @dpain, @title, @available, @intervalSteps, @id, @timesLimit } = params
     @lastUsedAtStep = 0
     @timesUsed      = 0
-    @deltas         = moral: [@dmoral], pain: [@dpain]
+
+
+    @deltas         = moral: @dmoral, pain: @dpain
+    @deltas.moral = [@deltas.moral] unless @deltas.moral instanceof Array
+
+
     @alive          = @available
     @elId = "action-#{@id}"
     @el = $("<div class='action' id='#{@elId}'></div>")
