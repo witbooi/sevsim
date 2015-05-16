@@ -46,6 +46,7 @@ class window.App
     @updateChart()
 
   makeActionStep: =>
+    # ---- delta MORAL ----
     deltaMoral = ActionManager.deltas.moral.shift()
     if typeof deltaMoral == 'undefined'
       @moral -= 0.1
@@ -55,12 +56,14 @@ class window.App
     @moral = 100 if @moral > 100
     @moral = 0 if @moral < 0
 
-    deltaPain = ActionManager.deltas.pain.shift()
-    if typeof deltaPain == 'undefined'
-      deltaPain = @moral >= 80 ? -1 : -0.2
-      @pain -= deltaPain
-    else
-      @pain += deltaPain
+    # ---- delta PAIN ----
+    @deltaPain = ActionManager.deltas.pain.shift()
+    if typeof @deltaPain == 'undefined'
+      @deltaPain = if (@moral >= 80)
+        -1
+      else
+        -0.2
+    @pain += @deltaPain
 
     @pain = 100 if @pain > 100
     @pain = 0 if @pain < 0

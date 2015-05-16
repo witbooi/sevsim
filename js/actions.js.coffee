@@ -20,7 +20,7 @@ window.ActionManager.actions.push new Action(
 window.ActionManager.actions.push new Action(
     id: 'fire-emergency'
     title: 'Уволить скорую помощь'
-    dpain: +15
+    dpain: 15
     dmoral: [-15, -5, -1, -1]
     available: true
     timesLimit: 1
@@ -35,5 +35,27 @@ window.ActionManager.actions.push new Action(
     intervalSteps: 15
   )
 
-$ => ActionManager.render()
+
+
+
+$ =>
+  Tabletop.init(
+    key: '1wRFHXvMjvFdvn-hsahXhHDHMofhHDhrpZt4UJ4P21OY',
+    simpleSheet: true,
+    callback: (data) =>
+      for item in data
+        window.ActionManager.actions.push new Action(
+          id: item['id - какая-нибудь уникальная среди других экшонов строка']
+          title: item['title - надпись на кнопке']
+          dpain: parseInt item['dpain - изменение унижения']
+          dmoral: parseInt item['dmoral - изменение духовности']
+          intervalSteps: parseInt item['intervalSteps - через сколько шагов можно применять следующий раз']
+          timesLimit: parseInt item['timesLimit - сколько раз можно применять']
+          available: true
+        )
+      ActionManager.render()
+      console.log window.ActionManager.actions
+    )
+
+  ActionManager.render()
 
