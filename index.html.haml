@@ -7,6 +7,8 @@
 
     %script{ :src => "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js" }
     %script{ :src => "https://cdnjs.cloudflare.com/ajax/libs/underscore.string/3.0.3/underscore.string.js" }
+
+    %script{ :src => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js" }
       
     %script{ :src => "http://code.highcharts.com/highcharts.js" }
     %script{ :src => "js/tabletop.js" }
@@ -15,34 +17,30 @@
     %script{ :src => "js/action_manager.js" }
     %script{ :src => "js/actions.js" }
 
+    %link{ :rel => "stylesheet", :href => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" }
     %link{ :rel => "stylesheet", :href => "style.css" }
-    %link{ :rel => "stylesheet", :href => "gridism.css" }
   %body
 
-    .grid
+    .container-fluid
+      .row
+        .col-xs-12
+          #actions
+            #actions-container
 
-      .unit.half
-        %ul#scores
-          %li#pain
-            %b Унижение
-            %span.val
+      .row
+        .col-xs-9
+          #chart-container
+        .col-xs-3
+          %ul#scores
+            %li#pain
+              %b Унижение
+              %span.val
 
-          %li#moral
-            %b Духовность
-            %span.val
+            %li#moral
+              %b Духовность
+              %span.val
 
-          %li#score
-            %b Распилено бабла
-            %span.val
+            %li#score
+              %b Распилено бабла
+              %span.val
 
-      #actions.unit.half
-        #actions-container
-
-          -# %input{ :type => :button, :value => "Раздать оливье", :"data-action-id" => 0 }
-          -# %input{ :type => :button, :value => "Объявить о начале строительства моста", :"data-action-id" => 1 }
-          -# %input{ :type => :button, :value => "Уволить скорую помощь", :"data-action-id" => 2 }
-          -# %input{ :type => :button, :value => "Включить патриотическую музыку по центру города", :"data-action-id" => 3 }
-
-    .grid
-      .unit.half
-        #chart-container
