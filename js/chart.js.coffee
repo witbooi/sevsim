@@ -2,11 +2,14 @@ window.chartFactory = (elId) ->
   new Highcharts.Chart
      chart:
        renderTo: elId
-       type: 'line'
+       type: 'spline'
        animation:
          duration: 940
          easing: "linear"
      plotOptions:
+       spline:
+         marker:
+           enabled: false
        line:
          marker:
            enabled: false
@@ -32,17 +35,25 @@ window.chartFactory = (elId) ->
        # minPadding: 2
 
      yAxis:
-       min: -10
-       max: 110
-       startOnTick: false
-       endOnTick: false
-       plotLines: [
+       [
          {
-           color: 'red'
-           width: 1
-           value: 80
-           dashStyle: 'dot'
+           min: -10
+           max: 110
+           title: ""
+           startOnTick: false
+           endOnTick: false
+           plotLines: [
+             {
+               color: 'red'
+               width: 1
+               value: 80
+               dashStyle: 'dot'
+             }
+           ],
+           title:
+             text: "Духовность / Унижение"
          }
+
        ]
 
      scrollbar:
@@ -53,10 +64,12 @@ window.chartFactory = (elId) ->
        {
          name: 'Духовность'
          data: []
+         color: "navy"
        }
        {
          name: 'Унижение'
          data: []
+         color: "red"
        }
      ]
 

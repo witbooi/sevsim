@@ -12,13 +12,17 @@
       
     %script{ :src => "http://code.highcharts.com/highcharts.js" }
     %script{ :src => "js/tabletop.js" }
+    %script{ :src => "js/stuff.js" }
     %script{ :src => "js/app.js" }
     %script{ :src => "js/chart.js" }
     %script{ :src => "js/action_manager.js" }
     %script{ :src => "js/actions.js" }
+    %script{ :src => "js/app_view.js" }
+    %script{ :src => "js/rainbowvis.js" }
 
     %link{ :rel => "stylesheet", :href => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" }
     %link{ :rel => "stylesheet", :href => "style.css" }
+    %title Симулятор Севастопольца
   %body
 
     .container-fluid
@@ -30,17 +34,24 @@
       .row
         .col-xs-9
           #chart-container
-        .col-xs-3
-          %ul#scores
-            %li#pain
-              %b Унижение
-              %span.val
+        .col-xs-3.scores-container
+          .row.level
+          .row
+            %ul#scores
+              %li#pain
+                %b Унижение
+                %span.val
 
-            %li#moral
-              %b Духовность
-              %span.val
+              %li#moral
+                %b Духовность
+                %span.val
 
-            %li#score
-              %b Распилено бабла
-              %span.val
+              %li#score
+                %b Распилено бабла
+                %span.val
+          .row.face-container
+            %img#face
+
+
+
 

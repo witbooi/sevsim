@@ -7,6 +7,7 @@ class window.App
     @pain = 0
     @curDate = new Date(2014, 2, 16)
     @stepSubscribers = []
+    @view = new window.AppView
 
   subscribeStep: (fn) =>
     @stepSubscribers.push fn
@@ -40,7 +41,7 @@ class window.App
     @score += @calculateStepScore()
 
     # 3. renderScores
-    @updateScores()
+    @view.render()
 
     # 4. updateChart
     @updateChart()
@@ -69,12 +70,6 @@ class window.App
     @pain = 0 if @pain < 0
 
 
-  updateScores: ->
-    $("#moral .val").html "#{Math.round @moral} %"
-    $("#pain .val").html  "#{Math.round @pain} %"
-    $("#score .val").html "#{Math.round @score} руб"
-
-
   updateChart: ->
     @chart.series[0].addPoint [@curDate.getTime(), @moral], true, @stepNum > 10
     @chart.series[1].addPoint [@curDate.getTime(), @pain], true, @stepNum > 10
@@ -85,7 +80,7 @@ class window.App
 
 
   calculateStepScore: ->
-    @pain * 3
+    @stepScore = @pain ** 2
 
 
 window.ONE_DAY = 86400000
