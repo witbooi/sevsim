@@ -49,22 +49,15 @@ class window.App
 
   makeActionStep: =>
     # ---- delta MORAL ----
-    deltaMoral = ActionManager.deltas.moral.shift()
-    if typeof deltaMoral == 'undefined'
-      @moral -= 0.1
-    else
-      @moral += deltaMoral
+    @deltaMoral = @calculateDeltaMoral()
+    @moral += @deltaMoral
 
     @moral = 100 if @moral > 100
     @moral = 0 if @moral < 0
 
     # ---- delta PAIN ----
-    @deltaPain = ActionManager.deltas.pain.shift()
-    if typeof @deltaPain == 'undefined'
-      @deltaPain = if (@moral >= 80)
-        -1
-      else
-        -0.2
+    @deltaPain = @calculateDeltaPain()
+
     @pain += @deltaPain
 
     @checkMaxPain()
@@ -72,6 +65,26 @@ class window.App
 
     @pain = 100 if @pain > 100
     @pain = 0 if @pain < 0
+
+  calculateDeltaPain: =>
+    dpain = ActionManager.deltas.pain.shift()
+    return dpain if typeof dpain != 'undefined'
+    if (@moral >= 100)
+      return -2
+    if (@moral >= 80)
+      return -1
+    Math.min(-(@moral - 40) / 100, -0.15)
+
+  calculateDeltaMoral: =>
+    deltaMoral = ActionManager.deltas.moral.shift()
+    if typeof deltaMoral != 'undefined'
+      return deltaMoral
+    if @pain == 0
+      return -1
+    if @moral >= 80
+      return -0.25
+    -0.1
+
 
   updateTerpenium: ->
     @terpenium += @calculateStepTerpenium()
@@ -84,7 +97,7 @@ class window.App
     if @moral > 25
       alert "Твой севастополец не вытерпел унижений и умер, но не расстраивайся, ведь ты исполнил его мечту \u2014 он умер в России."
     else
-      alert "Твой севастополец не вытерпел унижений, забандерложился и свалил в фашистскую Укропию, где не заставляют жрать говно ложками."
+      alert "Твой севастополец не вытерпел унижений, забандерложился и свалил в фашистскую Укропию, где не кормят говном с ложки."
     @stop()
 
   calculateStepTerpenium: ->
@@ -101,6 +114,8 @@ class window.App
       return +0.25
     if @moral == 80
       return +0.1
+    if @moral == 0
+      return -0.45
     0
 
 
@@ -132,10 +147,12 @@ class window.App
 
     @stepScore = @stepScore * (@level + 1)
 
+    @maxStepScore = @pain ** 3 * (@level + 1)
+
     @score += @stepScore
 
   calculateLevel: ->
-    @level = Math.round(Math.pow(Math.max(0, @score - 10000), 1/10)) - 2
+    @level = Math.round(Math.pow(Math.max(0, (@score - 100000) / 3), 1/10)) - 2
     @level = Math.max(@level, 0)
 
 

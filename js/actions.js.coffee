@@ -1,6 +1,11 @@
 $ =>
+  getKey = () ->
+    parts = window.location.href.split "?"
+    return '1wRFHXvMjvFdvn-hsahXhHDHMofhHDhrpZt4UJ4P21OY' if parts.length == 1
+    parts[1]
+
   Tabletop.init
-    key: '1wRFHXvMjvFdvn-hsahXhHDHMofhHDhrpZt4UJ4P21OY',
+    key:  getKey(),
     simpleSheet: true,
     callback: (data) =>
       for item in data
