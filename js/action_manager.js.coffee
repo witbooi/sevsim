@@ -5,7 +5,7 @@ class window.ActionManager
   @flags = {}
 
   @stockFull: =>
-    @actions = _.shuffle @actions
+    @actionsStock = _.shuffle @actionsStock
     for i in [0..15]
       @takeActionFromStock()
 
@@ -49,7 +49,9 @@ class window.ActionManager
     this
 
   @actionById: (actId) =>
-    _.findWhere @actions, {id: actId}
+    r = _.findWhere @actions, {id: actId}
+    return r if r?
+    _.findWhere @actionsStock, {id: actId}
 
   @callbacks:
     invoke:
