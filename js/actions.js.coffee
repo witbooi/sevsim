@@ -18,6 +18,5 @@ $ =>
           timesLimit:    eval item['timesLimit - сколько раз можно применять']
           alive:         !!(eval(item['alive']))
         )
-        window.ActionManager.actions.push a
-
-      ActionManager.render()
+        window.ActionManager.actionsStock.push a
+      window.ActionManager.stockFull()

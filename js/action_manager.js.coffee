@@ -1,7 +1,19 @@
 class window.ActionManager
   @deltas = moral: [], pain: []
   @actions = []
+  @actionsStock = []
   @flags = {}
+
+  @stockFull: =>
+    @actions = _.shuffle @actions
+    for i in [0..15]
+      @takeActionFromStock()
+
+    ActionManager.render()
+
+  @takeActionFromStock: =>
+    @actions.push @actionsStock.pop()
+
 
   @addDeltas: (type, deltas) ->
     for delta, i in deltas
@@ -11,7 +23,16 @@ class window.ActionManager
         @deltas[type][i] = delta
 
   @getTemplate: =>
-    $.get "/templates/action.tpl", (resp) => @actionTemplate = _.template(resp)
+    s = """
+      <% disabled = a.available == true ? '' : 'disabled=\"disabled\"' %>
+        <% timesLeft = a.timesLeft() > 0 ? a.timesLeft() : '' %>
+        <% btnClass = a.rank() == 'positive' ? 'btn-primary' : 'btn-danger' %>
+      <button type=\"button\" data-action-id=\"<%= a.id %>\" id=\"action-<%= a.id %>-btn\" class=\"action-btn btn <%= btnClass %> \" <%= disabled %>>
+        <nobr><%= a.title.replace(/\\\"/g,'&quot;') %></nobr>
+        <span class="times-left"><%= timesLeft %></span>
+      </button>
+      """
+    @actionTemplate = _.template(s)
 
   @el = $("<div id='actions-container'></div>")
 
@@ -38,6 +59,9 @@ class window.ActionManager
         a.engage() unless a.alive == true
       mass_ban: =>
         @actionById('ritual').dismiss()
+      vinco: =>
+        a = @actionById 'boyarishnik'
+        a.engage() unless a.alive == true
     
 
 class window.Action
@@ -88,8 +112,9 @@ class window.Action
   dismiss: =>
     @alive = false
     @available = false
-    @el.fadeOut "slow", () => @el.remove()
+    @el.fadeOut "1000", () => @el.remove()
     delete this
+    ActionManager.takeActionFromStock()
 
   engage: =>
     @available = true
@@ -113,3 +138,24 @@ class window.Action
   addDeltas: =>
     ActionManager.addDeltas 'moral', @deltas.moral
     ActionManager.addDeltas 'pain', @deltas.pain
+
+  timesLeft: =>
+    @timesLimit - @timesUsed
+
+  rank: =>
+    tmp = @totalDelta('pain') - @totalDelta('moral')
+    if tmp < 0
+      "positive"
+    else
+      "negative"
+
+  totalDelta: (type) =>
+    tmp = if @deltas[type] instanceof Array
+      _.reduce(
+        @deltas[type]
+        (a, b) -> a + b
+        0
+      )
+    else
+      @deltas[type]
+

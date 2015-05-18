@@ -1,6 +1,3 @@
-.unit
-  border: 1px dotted blue
-
 ul#scores
   list-style-type: none
   // padding-bottom: 1em
@@ -13,51 +10,57 @@ ul#scores
 
 #actions-container
   div.action
+    width: 22em
     border: 0px dotted red
     padding: 2px
     margin: 2px
     float: left
     .action-btn
+      width: 21em
       &[disabled=disabled]
         color: #ccc
 
-img#face
+.face-container
   width: 250px
   height: 250px
+  .face
+    height: 100%
+    width: 100%
+    background-repeat: no-repeat
+    background-size: cover
 
-  &.pain-0
-    content: url("img/face/0.png")
-    background-image: url("img/face/0.png")
+    &.pain-0
+      background-image: url("img/face/0.png")
 
-  &.pain-10
-    content: url("img/face/10.png")
+    &.pain-10
+      background-image: url("img/face/10.png")
 
-  &.pain-20
-    content: url("img/face/20.png")
+    &.pain-20
+      background-image: url("img/face/20.png")
 
-  &.pain-30
-    content: url("img/face/30.png")
+    &.pain-30
+      background-image: url("img/face/30.png")
 
-  &.pain-40
-    content: url("img/face/40.png")
+    &.pain-40
+      background-image: url("img/face/40.png")
 
-  &.pain-50
-    content: url("img/face/50.png")
+    &.pain-50
+      background-image: url("img/face/50.png")
 
-  &.pain-60
-    content: url("img/face/60.png")
+    &.pain-60
+      background-image: url("img/face/60.png")
 
-  &.pain-70
-    content: url("img/face/70.png")
+    &.pain-70
+      background-image: url("img/face/70.png")
 
-  &.pain-80
-    content: url("img/face/80.png")
+    &.pain-80
+      background-image: url("img/face/80.png")
 
-  &.pain-90
-    content: url("img/face/90.png")
+    &.pain-90
+      background-image: url("img/face/90.png")
 
-  &.pain-100
-    content: url("img/face/100.gif")
+    &.pain-100
+      background-image: url("img/face/100.gif")
 
 .hidden
   display: none
@@ -85,3 +88,11 @@ img.hidden
     content: url("img/face/90.png")
   &.img10
     content: url("img/face/100.gif")
+
+
+#actions-container
+  .action
+    white-space: nowrap
+    span.times-left
+      color: #999
+      font-size: 70%
