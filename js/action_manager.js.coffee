@@ -13,6 +13,7 @@ class window.ActionManager
 
   @takeActionFromStock: =>
     @actions.push @actionsStock.pop()
+    @render()
 
 
   @addDeltas: (type, deltas) ->
