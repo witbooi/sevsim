@@ -37,7 +37,6 @@ class window.ActionManager
         a = @actionById 'mass_ban'
         a.engage() unless a.alive == true
       mass_ban: =>
-        alert("Ритуала больше не будет :(")
         @actionById('ritual').dismiss()
     
 
@@ -58,7 +57,7 @@ class window.Action
     @el = $("<div class='action' id='#{@elId}'></div>")
 
   render: =>
-    @el.addClass "hidden" if @alive == false
+    @el.hide() if @alive == false
     @el.html(ActionManager.actionTemplate({a: this}))
     @el.find(".action-btn").on "click", (e) => @invoke e
     this
@@ -89,13 +88,13 @@ class window.Action
   dismiss: =>
     @alive = false
     @available = false
-    @el.remove()
+    @el.fadeOut "slow", () => @el.remove()
     delete this
 
   engage: =>
     @available = true
     @alive = true
-    @el.removeClass "hidden"
+    @el.fadeIn()
     @render()
 
   suspend: =>
