@@ -1,6 +1,7 @@
 class window.ActionManager
   @deltas = moral: [], pain: []
   @actions = []
+  @flags = {}
 
   @addDeltas: (type, deltas) ->
     for delta, i in deltas
@@ -29,11 +30,20 @@ class window.ActionManager
   @actionById: (actId) =>
     _.findWhere @actions, {id: actId}
 
-
+  @callbacks:
+    invoke:
+      ritual: =>
+        @flags.ritualInvoked = true
+        a = @actionById 'mass_ban'
+        a.engage() unless a.alive == true
+      mass_ban: =>
+        alert("Ритуала больше не будет :(")
+        @actionById('ritual').dismiss()
+    
 
 class window.Action
   constructor: (params) ->
-    { @dmoral, @dpain, @title, @available, @intervalSteps, @id, @timesLimit } = params
+    { @dmoral, @dpain, @title, @available, @intervalSteps, @id, @timesLimit, @alive } = params
     @lastUsedAtStep = 0
     @timesUsed      = 0
 
@@ -43,11 +53,12 @@ class window.Action
     @deltas.pain = [@deltas.pain] unless @deltas.pain instanceof Array
 
 
-    @alive          = @available
+    @available = true
     @elId = "action-#{@id}"
     @el = $("<div class='action' id='#{@elId}'></div>")
 
   render: =>
+    @el.addClass "hidden" if @alive == false
     @el.html(ActionManager.actionTemplate({a: this}))
     @el.find(".action-btn").on "click", (e) => @invoke e
     this
@@ -57,6 +68,10 @@ class window.Action
     @lastUsedAtStep = app.stepNum
 
     @addDeltas()
+
+    if ActionManager.callbacks.invoke[@id]?
+      fn = ActionManager.callbacks.invoke[@id]
+      fn.apply()
 
     @suspend() if @shouldSuspend()
     @dismiss() if @shouldDismiss()
@@ -75,6 +90,13 @@ class window.Action
     @alive = false
     @available = false
     @el.remove()
+    delete this
+
+  engage: =>
+    @available = true
+    @alive = true
+    @el.removeClass "hidden"
+    @render()
 
   suspend: =>
     @available = false
