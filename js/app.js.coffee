@@ -112,7 +112,7 @@ class window.App
       return +1.5
     if @moral >= 90
       return +0.5
-    if @moral == 80
+    if @moral >= 80
       return +0.35
     if @moral == 0
       return -0.45
