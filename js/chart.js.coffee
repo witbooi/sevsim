@@ -52,6 +52,8 @@ window.chartFactory = (elId) ->
            ],
            title:
              text: "Духовность / Унижение"
+           labels:
+             format: "{value} %"
          }
 
        ]
