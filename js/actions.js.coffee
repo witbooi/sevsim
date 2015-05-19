@@ -17,6 +17,8 @@ $ =>
           intervalSteps: eval item['intervalSteps - через сколько шагов можно применять следующий раз']
           timesLimit:    eval item['timesLimit - сколько раз можно применять']
           alive:         !!(eval(item['alive']))
+          enables:       item['enables']
+          disables:      item['disables']
         )
         window.ActionManager.actionsStock.push a
       window.ActionManager.stockFull()

@@ -17,6 +17,9 @@ class window.ActionManager
     for i in [0..14]
       @takeActionFromStock()
 
+    @actions.push @actionById "ritual"
+    @actions.push @actionById "mass_ban"
+
     ActionManager.render()
 
   @takeActionFromStock: =>
@@ -65,32 +68,35 @@ class window.ActionManager
 
   @callbacks:
     invoke:
-      ritual: =>
-        @flags.ritualInvoked = true
-        a = @actionById 'mass_ban'
-        a.engage() unless a.alive == true
-      mass_ban: =>
-        @actionById('ritual').dismiss()
-      vinco: =>
-        a = @actionById 'boyarishnik'
-        a.engage() unless a.alive == true
-    
+      {}
 
 class window.Action
   constructor: (params) ->
-    { @dmoral, @dpain, @title, @available, @intervalSteps, @id, @timesLimit, @alive } = params
+    { @dmoral, @dpain, @title, @available, @intervalSteps, @id, @timesLimit, @alive, @enables, @disables } = params
     @lastUsedAtStep = 0
     @timesUsed      = 0
 
-
-    @deltas         = moral: @dmoral, pain: @dpain
+    @deltas       = moral: @dmoral, pain: @dpain
     @deltas.moral = [@deltas.moral] unless @deltas.moral instanceof Array
-    @deltas.pain = [@deltas.pain] unless @deltas.pain instanceof Array
-
+    @deltas.pain  = [@deltas.pain] unless @deltas.pain instanceof Array
 
     @available = true
-    @elId = "action-#{@id}"
-    @el = $("<div class='action' id='#{@elId}'></div>")
+    @elId      = "action-#{@id}"
+    @el        = $("<div class   = 'action' id = '#{@elId}'></div>")
+
+    if @enables != ""
+      ActionManager.callbacks.invoke[@id] = () =>
+        return false if @timesUsed > 1
+        ActionManager.actionById(@enables).engage()
+        alert "Теперь ты можешь #{ActionManager.actionById(@enables).title.uncapitalizeFirstLetter()}"
+
+    if @disables != ""
+      ActionManager.callbacks.invoke[@id] = () =>
+        return false if @timesUsed > 1
+        ActionManager.actionById(@disables).dismiss()
+        alert "Теперь ты НЕ можешь #{ActionManager.actionById(@disables).title.uncapitalizeFirstLetter()}"
+
+
 
   render: =>
     @el.hide() if @alive == false & @fading != true

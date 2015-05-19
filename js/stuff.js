@@ -12,3 +12,7 @@ Number.prototype.format = function(n, x, s, c) {
 
     return (c ? num.replace('.', c) : num).replace(new RegExp(re, 'g'), '$&' + (s || ','));
 };
+
+String.prototype.uncapitalizeFirstLetter = function() {
+    return this.charAt(0).toLowerCase() + this.slice(1);
+}
