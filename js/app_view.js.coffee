@@ -12,23 +12,37 @@ class window.AppView
 class window.ScoreView
   constructor: (el) ->
     @el = el
+    @rainbows =
+      score: new Rainbow()
+      percent: new Rainbow()
 
-    @r = new Rainbow()
-    @r.setSpectrum "779dff", "red"
-    @r.setNumberRange 0, 10000
+    @rainbows.score.setSpectrum "779dff", "red"
+    @rainbows.score.setNumberRange 0, 10000
+
+    @rainbows.percent.setSpectrum "779dff", "red"
+    @rainbows.percent.setNumberRange 0, 100
+
 
   render: =>
     @el.find("#pain .val").html  "#{Math.round app.pain} %"
+    @el.find("#pain .val").css "color", "#" + @rainbows.percent.colourAt(app.pain)
+
     @el.find("#moral .val").html "#{Math.round app.moral} %"
 
     @el.find("#score .val").html "#{app.score.format 0, 3, " "} руб"
-    @el.find("#score .val").css "color", "#" + @r.colourAt(app.stepScore)
+    @el.find("#score .val").css "color", "#" + @rainbows.score.colourAt(app.stepScore)
 
     levelTitle = @levels[app.level].title
     levelDesc = @levels[app.level].desc
     @el.find("#level .val").html("<b>#{levelTitle}</b>&nbsp;&ndash;&nbsp;#{levelDesc}") if levelTitle?
 
-    @el.find("#terpenium .val").html("#{app.terpenium.format 0, 3, "", "."} %")
+    terpVal = @el.find("#terpenium .val")
+    terpVal.removeClass "positive"
+    terpVal.removeClass "negative"
+    terpVal.addClass "positive" if app.deltaTerpenium > 0
+    terpVal.addClass "negative" if app.deltaTerpenium < 0
+    terpVal.html("#{app.terpenium.format 0, 3, "", "."} %")
+
 
   levels:
     [

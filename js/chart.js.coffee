@@ -6,6 +6,7 @@ window.chartFactory = (elId) ->
        animation:
          duration: 940
          easing: "linear"
+       backgroundColor: "rgba(255, 255, 255, 0.0)"
      plotOptions:
        spline:
          marker:
@@ -50,8 +51,6 @@ window.chartFactory = (elId) ->
                dashStyle: 'dot'
              }
            ],
-           title:
-             text: "Духовность / Унижение"
            labels:
              format: "{value} %"
          }
@@ -67,11 +66,21 @@ window.chartFactory = (elId) ->
          name: 'Духовность'
          data: []
          color: "navy"
+         shadow:
+           color: '#ccc'
+           width: 9
+           offsetX: 0
+           offsetY: 3
        }
        {
          name: 'Унижение'
          data: []
          color: "red"
+         shadow:
+           color: '#ccc'
+           width: 9
+           offsetX: 0
+           offsetY: 3
        }
      ]
 

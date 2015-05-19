@@ -4,9 +4,17 @@ class window.ActionManager
   @actionsStock = []
   @flags = {}
 
+  @enableActions: =>
+    for a in @actions
+      a.enable()
+
+  @disableActions: =>
+    for a in @actions
+      a.disable()
+
   @stockFull: =>
     @actionsStock = _.shuffle @actionsStock
-    for i in [0..15]
+    for i in [0..14]
       @takeActionFromStock()
 
     ActionManager.render()
@@ -28,8 +36,9 @@ class window.ActionManager
       <% disabled = a.available == true ? '' : 'disabled=\"disabled\"' %>
         <% timesLeft = a.timesLeft() > 0 ? a.timesLeft() : '' %>
         <% btnClass = a.rank() == 'positive' ? 'btn-primary' : 'btn-danger' %>
-      <button type=\"button\" data-action-id=\"<%= a.id %>\" id=\"action-<%= a.id %>-btn\" class=\"action-btn btn <%= btnClass %> \" <%= disabled %>>
-        <nobr><%= a.title.replace(/\\\"/g,'&quot;') %></nobr>
+        <% title = a.title.replace(/\\\"/g,'&quot;') %>
+      <button type=\"button\" data-action-id=\"<%= a.id %>\" id=\"action-<%= a.id %>-btn\" class=\"action-btn btn <%= btnClass %> \" <%= disabled %> title=\"<%= title%>\">
+        <nobr><%= title %></nobr>
         <span class="times-left"><%= timesLeft %></span>
       </button>
       """
@@ -88,6 +97,12 @@ class window.Action
     @el.html(ActionManager.actionTemplate({a: this}))
     @el.find(".action-btn").on "click", (e) => @invoke e
     this
+
+  enable: =>
+    @el.find(".btn").removeAttr("disabled")
+
+  disable: =>
+    @el.find(".btn").attr("disabled", "disabled")
 
   invoke: (e) =>
     @timesUsed++

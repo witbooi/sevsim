@@ -9,16 +9,20 @@ ul#scores
   height: 400px
 
 #actions-container
+  text-align: center
   div.action
-    width: 23em
+    width: 23.5em
     border: 0px dotted red
     padding: 2px
     margin: 2px
     float: left
     .action-btn
+      opacity: 0.9
       width: 21em
       &[disabled=disabled]
         color: #ccc
+      &.btn-primary
+        background-color: "rgba(51, 122, 183, 0.1)" !important
 
 .face-container
   width: 250px
@@ -96,3 +100,73 @@ img.hidden
     span.times-left
       color: #999
       font-size: 70%
+
+
+.row.footer
+  background-color: rgba(255, 255, 255, 0.9)
+  padding: 3.5em 0 2em 0
+  img.proud
+    width: 201px
+    height: 113px
+  img.coat
+    width: 201px
+    height: 113px
+  .madein
+  div.proud
+    text-align: right
+    padding-right: 3em
+
+a.eastern
+  color: inherit
+  text-decoration: inherit
+  &:hover
+    color: inherit
+    text-decoration: inherit
+
+
+body 
+  background: url('img/nahim.jpg') no-repeat center center fixed
+  -webkit-background-size: cover
+  -moz-background-size: cover
+  -o-background-size: cover
+  background-size: cover
+
+  .header
+    height: 15em
+    margin-bottom: 2em
+
+    h3
+      float: right
+      font-size: 13pt
+      padding: 4pt
+      padding-left: 17pt
+      font-weight: normal
+      font-family: 'PT Serif Caption', serif
+      color: #555
+      text-shadow: 1px 0px 1px rgba(60, 60, 60, 0.5)
+      float: right
+      background-color: rgba(255, 255, 255, 0.89)
+
+    h1.title
+      margin-top: 0.8em
+      font-size: 4em
+      font-family: 'PT Serif Caption', serif
+      color: #555
+      text-shadow: 1px 1px 1px rgba(60, 60, 60, 0.3)
+      float: right
+      background-color: rgba(255, 255, 255, 0.89)
+      padding: 0.2em
+      padding-left: 1em
+
+
+  .row.body
+    background-color: rgba(255, 255, 255, 0.9)
+    padding: 3em
+    margin-bottom: 3em
+
+    #terpenium
+      .val
+        &.positive
+          color: green
+        &.negative
+          color: red

@@ -24,8 +24,8 @@
     %script{ :src => "js/app_view.js" }
     %script{ :src => "js/rainbowvis.js" }
 
-    %link{ :rel => "stylesheet", :href => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" }
     %link{ :rel => "stylesheet", :href => "style.css" }
+    %link{ :rel => "stylesheet", :href => "theme.css" }
     %title Симулятор Севастопольца
     :javascript
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -35,54 +35,13 @@
       ga('create', 'UA-60755864-2', 'auto');
       ga('send', 'pageview');
     :css
-      .header {
-        height: 15em;
-        margin-bottom: 2em;
-      }
-
-      .header h3 {
-        float: right;
-        margin-right: 8em;
-        font-size: 1em;
-        font-family: 'PT Serif Caption', serif;
-        color: #eee;
-        text-shadow: 4px 3px 15px rgba(10, 10, 10, 1);
-        float: right;
-      }
-
-      .header h1 {
-        margin-right: 2em;
-        margin-top: 0.8em;
-        font-size: 4em;
-        font-family: 'PT Serif Caption', serif;
-        color: #eee;
-        text-shadow: 3px 3px 2px rgba(10, 10, 10, 0.7);
-        float: right;
-        border-bottom: 2px solid #eee;
-      }
-
-
-      body { 
-        background: url('img/nahim.jpg') no-repeat center center fixed; 
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-      }
-
-      .row.body {
-        background-color: rgba(255, 255, 255, 0.9);
-        -# border: 1px solid red;
-        padding: 3em;
-        margin-bottom: 3em;
-      }
 
   %body
 
     .container.wrap
       .row.header
         .row
-          %h1 Симулятор севастопольца
+          %h1.title Симулятор севастопольца
           %h3 По заказу Департамента унижения пидорашек Правительства Севастополя
 
       .row.body
@@ -124,6 +83,26 @@
             .row.face-container
               %div.face
 
+      .row.footer
+        .col-xs-2.coat
+          %img.coat{src: "img/coat.svg"}
+        .col-xs-7
+          %div.madein
+            Создано в&nbsp;
+            %a{href: "http://www.interfax.ru/russia/437063", target: "_blank"}>цифровой долине 
+            &nbsp;по заказу
+            %nobr
+              %i
+                Департамента унижения
+                %a{href: "https://wiki.1chan.ru/wiki/%D0%9F%D0%B8%D0%B4%D0%BE%D1%80%D0%B0%D1%88%D0%BA%D0%B0_(%D0%BD%D0%B5_%D1%87%D0%B5%D0%BB%D0%BE%D0%B2%D0%B5%D0%BA)", target: "_blank"}пидорашек
+            Правительства города Севастополь
+            %br
+            %br
+            г. Севастополь (федерального значения)
+            %br
+            %a.eastern{href: "img/sut_igry.png"} &copy;&nbsp;2015
+        .col-xs-3.proud
+          %img.proud{src: "img/gorjus2.png"}
 
    
   %img.hidden.img0
@@ -137,4 +116,3 @@
   %img.hidden.img8
   %img.hidden.img9
   %img.hidden.img10
-

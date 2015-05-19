@@ -23,10 +23,15 @@ class window.App
 
   start: ->
     @interval = setInterval @makeStep, 1000
+    ActionManager.enableActions()
     @makeStep()
 
   stop: ->
+    @suspend()
+
+  suspend: ->
     clearInterval @interval
+    ActionManager.disableActions()
 
 
   makeStep: =>
@@ -87,10 +92,15 @@ class window.App
 
 
   updateTerpenium: ->
-    @terpenium += @calculateStepTerpenium()
-    @terpenium = 100 if @terpenium > 100
+    @deltaTerpenium = @calculateStepTerpenium()
+    @terpenium += @deltaTerpenium
+
+    if @terpenium > 100
+      @terpenium      = 100
+      @deltaTerpenium = 0
+
     if @terpenium <= 0
-      @terpenium = 0
+      @terpenium      = 0
       @gameOver()
 
   gameOver: ->
