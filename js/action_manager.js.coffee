@@ -84,7 +84,7 @@ class window.Action
     @el = $("<div class='action' id='#{@elId}'></div>")
 
   render: =>
-    @el.hide() if @alive == false
+    @el.hide() if @alive == false & @fading != true
     @el.html(ActionManager.actionTemplate({a: this}))
     @el.find(".action-btn").on "click", (e) => @invoke e
     this
@@ -115,9 +115,11 @@ class window.Action
   dismiss: =>
     @alive = false
     @available = false
-    @el.fadeOut "1000", () => @el.remove()
-    delete this
-    ActionManager.takeActionFromStock()
+    @el.fadeOut 500, () =>
+      @el.remove()
+      delete this
+      ActionManager.takeActionFromStock()
+    @fading = true
 
   engage: =>
     @available = true

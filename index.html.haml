@@ -9,6 +9,10 @@
     %script{ :src => "https://cdnjs.cloudflare.com/ajax/libs/underscore.string/3.0.3/underscore.string.js" }
 
     %script{ :src => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js" }
+
+      
+    %link{ :rel => "stylesheet", :href => "https://fonts.googleapis.com/css?family=PT+Serif+Caption&subset=latin,cyrillic" }
+    %link{ :rel => "stylesheet", :href => "https://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=latin,cyrillic" }
       
     %script{ :src => "http://code.highcharts.com/highcharts.js" }
     %script{ :src => "js/tabletop.js" }
@@ -30,47 +34,98 @@
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       ga('create', 'UA-60755864-2', 'auto');
       ga('send', 'pageview');
+    :css
+      .header {
+        height: 15em;
+        margin-bottom: 2em;
+      }
+
+      .header h3 {
+        float: right;
+        margin-right: 8em;
+        font-size: 1em;
+        font-family: 'PT Serif Caption', serif;
+        color: #eee;
+        text-shadow: 4px 3px 15px rgba(10, 10, 10, 1);
+        float: right;
+      }
+
+      .header h1 {
+        margin-right: 2em;
+        margin-top: 0.8em;
+        font-size: 4em;
+        font-family: 'PT Serif Caption', serif;
+        color: #eee;
+        text-shadow: 3px 3px 2px rgba(10, 10, 10, 0.7);
+        float: right;
+        border-bottom: 2px solid #eee;
+      }
+
+
+      body { 
+        background: url('img/nahim.jpg') no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
+
+      .row.body {
+        background-color: rgba(255, 255, 255, 0.9);
+        -# border: 1px solid red;
+        padding: 3em;
+        margin-bottom: 3em;
+      }
+
   %body
 
-    .container-fluid
-      .row
-        .col-xs-12
-          #actions
-            #actions-container
+    .container.wrap
+      .row.header
+        .row
+          %h1 Симулятор севастопольца
+          %h3 По заказу Департамента унижения пидорашек Правительства Севастополя
 
-      .row
-        .col-xs-9
-          #chart-container
-        .col-xs-3.scores-container
-          .row
-            %ul#scores
-              %li#pain
-                %b Унижение
-                %span.val
+      .row.body
 
-              %li#moral
-                %b Духовность
-                %span.val
+        .row
+          .col-xs-12
+            #actions
+              #actions-container
 
-              %li#terpenium
-                %b Терпение
-                %span.val
+        .row
+          .col-xs-9
+            #chart-container
+          .col-xs-3.scores-container
+            .row
+              %ul#scores
+                %li#pain
+                  %b Унижение
+                  %span.val
 
-              %li#score
-                %b Распилено бабла
-                %span.val
-                %br
-                %br
+                %li#moral
+                  %b Духовность
+                  %span.val
 
-              %li#level
-                %b Достигнутый уровень
-                %br
-                %span.val
+                %li#terpenium
+                  %b Терпение
+                  %span.val
 
-          .row.face-container
-            %div.face
+                %li#score
+                  %b Распилено бабла
+                  %span.val
+                  %br
+                  %br
+
+                %li#level
+                  %b Достигнутый уровень
+                  %br
+                  %span.val
+
+            .row.face-container
+              %div.face
 
 
+   
   %img.hidden.img0
   %img.hidden.img1
   %img.hidden.img2
