@@ -88,15 +88,27 @@ class window.Action
       ActionManager.callbacks.invoke[@id] = () =>
         return false if @timesUsed > 1
         ActionManager.actionById(@enables).engage()
-        alert "Теперь ты можешь #{ActionManager.actionById(@enables).title.uncapitalizeFirstLetter()}"
+        @notifyEnabled ActionManager.actionById(@enables)
 
     if @disables != ""
       ActionManager.callbacks.invoke[@id] = () =>
         return false if @timesUsed > 1
         ActionManager.actionById(@disables).dismiss()
-        alert "Теперь ты НЕ можешь #{ActionManager.actionById(@disables).title.uncapitalizeFirstLetter()}"
+        @notifyDisabled ActionManager.actionById(@disables)
 
+  notifyEnabled: (action) =>
+    new PNotify
+      title: ''
+      text: "Теперь ты можешь #{action.title.uncapitalizeFirstLetter()}"
+      type: 'info'
+      icon: false
 
+  notifyDisabled: (action) =>
+    new PNotify
+      title: ''
+      text: "Теперь ты не можешь #{action.title.uncapitalizeFirstLetter()}"
+      type: 'error'
+      icon: false
 
   render: =>
     @el.hide() if @alive == false & @fading != true
