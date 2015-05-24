@@ -132,6 +132,8 @@ class window.Action
       fn = ActionManager.callbacks.invoke[@id]
       fn.apply()
 
+    story = StoryManager.create this
+
     @suspend() if @shouldSuspend()
     @dismiss() if @shouldDismiss()
 

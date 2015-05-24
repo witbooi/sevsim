@@ -1,12 +1,12 @@
 class window.AppView
-   constructor: ->
-     @el = $("body")
-     @scoreView = new window.ScoreView @el.find(".scores-container")
-     @faceView = new window.FaceView @el.find(".face-container")
+  constructor: ->
+    @el = $("body")
+    @scoreView = new window.ScoreView @el.find(".scores-container")
+    @faceView = new window.FaceView @el.find(".face-container")
 
-   render: ->
-     @scoreView.render()
-     @faceView.render()
+  render: ->
+    @scoreView.render()
+    @faceView.render()
 
 
 class window.ScoreView

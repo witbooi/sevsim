@@ -26,7 +26,13 @@
     %script{ :src => "js/action_manager.js" }
     %script{ :src => "js/actions.js" }
     %script{ :src => "js/app_view.js" }
+    %script{ :src => "js/story_manager.js" }
     %script{ :src => "js/rainbowvis.js" }
+
+    %script{ :src => "//cdn.jsdelivr.net/jquery.slick/1.5.0/slick.min.js" }
+    %link{ :rel => "stylesheet", :href => "//cdn.jsdelivr.net/jquery.slick/1.5.0/slick.css" }
+    %link{ :rel => "stylesheet", :href => "css/slick-theme.css" }
+
 
     %title Симулятор Севастопольца
     :javascript
@@ -85,6 +91,12 @@
             .row.face-container
               %div.face
 
+        .row#stories{style: "background-color: #A9D0F5; "}
+          .carousel
+            .item
+              %h3 hello world 1
+
+
       .row.footer
         .col-xs-2.coat
           %img.coat{src: "img/coat.svg"}
@@ -106,15 +118,3 @@
         .col-xs-3.proud
           %img.proud{src: "img/gorjus2.png"}
 
-   
-  %img.hidden.img0
-  %img.hidden.img1
-  %img.hidden.img2
-  %img.hidden.img3
-  %img.hidden.img4
-  %img.hidden.img5
-  %img.hidden.img6
-  %img.hidden.img7
-  %img.hidden.img8
-  %img.hidden.img9
-  %img.hidden.img10

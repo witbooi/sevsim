@@ -1,6 +1,6 @@
 serve export . ../sevsim-build
 cd ../sevsim-build
-for file in *.sass
+for file in css/*.sass
 do
  mv "$file" "${file%.sass}.css"
 done
