@@ -8,7 +8,7 @@ class window.StoriesView
     $ =>
       @carEl = @el.find('.carousel')
       @carEl.slick
-        slidesToShow: 3
+        slidesToShow: 4
         slidesToScroll: 1
 
   addCarouselAction: (actionView) =>
@@ -20,33 +20,43 @@ class window.StoriesView
 
 class window.StoryView
   constructor: (story) ->
-    console.log("New story")
     @action = story.action
-    @el = $("<div></div>")
+    @el = @getTemplate()
+    # @el.find(".content").appendTo "body"
 
   render: =>
-    if $(".story-template." + @action.id).length > 0
-      content = $(".story-template." + @action.id).html()
-      $(".story-template." + @action.id).remove()
-    else
-      content = "<span>#{@action.title}</span>"
-
-    window.x = @el
-
-    @el.html content
-    @el.find(".content").appendTo "body"
-
     @el.find(".preview").on "click", () =>
-      @el.find(".content").modal("toggle")
+      modalEl = $(".story-content[data-action-id='ritual']")
+      modalEl.on "hide.bs.modal", (e) =>
+        iframe = modalEl.find("iframe")
+        iframe.attr('src', iframe.attr('src')) if iframe.length > 0
+      modalEl.modal("show")
 
     @el
 
+  getTemplate: =>
+    tplClassSelector = ".story-template." + @action.id
+    tpl = $(tplClassSelector)
+    if tpl.length > 0
+      tpl = $(tpl[0]).clone()
+    else
+      tpl = $("<div></div>")
+
+    unless tpl.find(".preview").length > 0
+      tpl.append($("<span class='preview'>#{@action.title}</span>"))
+
+    tpl
 
 
 class window.StoryManager
   @stories =[]
   $ =>
     @view = new StoriesView $("#stories")
+    # debugger
+    for el in $(".stories-templates .story-content")
+      $el = $(el)
+      $el.attr("data-action-id", $el.parent(".story-template").attr("data-action-id"))
+      $el.appendTo("body")
 
   @create: (action) =>
     story = new Story action

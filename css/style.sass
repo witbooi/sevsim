@@ -171,13 +171,28 @@ body
         &.negative
           color: red
 
-.stories-templates
-  display: none
+  .modal-dialog
+    width: 75% !important
+    .modal-body
+      text-align: center
 
-.slick-slide
-  .content
+  .stories-templates
+    .story-template
+      display: none
+    // width: 0 !important
+    // height: 0 !important
+
+  .slick-slide
+    .content
+      display: none
+
+  .story-content
     display: none
 
-
-.modal-dialog
-  width: 75% !important
+  #stories
+    .slick-slide
+      border: 1px solid white
+      text-align: center
+      padding: 0.7em
+      margin: 0.3em
+      height: 100px

@@ -26,7 +26,8 @@
     %script{ :src => "js/app.js" }
     %script{ :src => "js/chart.js" }
     %script{ :src => "js/action_manager.js" }
-    %script{ :src => "js/actions.js" }
+    %script{ :src => "js/actions2.js" }
+    %script{ :src => "js/actions_list.js"}
     %script{ :src => "js/app_view.js" }
     %script{ :src => "js/story_manager.js" }
 
@@ -114,8 +115,6 @@
 
         .row#stories{style: "background-color: #A9D0F5; "}
           .carousel
-            %div
-              %h3 hello world 1
 
 
       .row.footer
@@ -139,9 +138,8 @@
         .col-xs-3.proud
           %img.proud{src: "img/gorjus2.png"}
 
-  .stories-templates{style: "display: xnone"}
+  .stories-templates
     - Dir.glob("templates/actions/*.html.haml").each do |filename|
-      %div{ class: "story-template " + (File.basename(filename).sub ".html.haml", "") }
+      - action_name = (File.basename(filename).sub ".html.haml", "")
+      %div{ :class => "story-template #{action_name}", :"data-action-id" => action_name }
         = Haml::Engine.new(File.read(filename)).render
-
-

@@ -125,10 +125,10 @@ $slick-opacity-not-active: 0.25 !default;
 /* Dots */
 
 .slick-slider {
-    margin-bottom: 30px;
+    // margin-bottom: 30px;
+    min-height: 80px;
     .slick-slide {
       max-width: 32%;
-      border: 1px dotted red;
     }
 }
 
