@@ -22,11 +22,10 @@ class window.StoryView
   constructor: (story) ->
     @action = story.action
     @el = @getTemplate()
-    # @el.find(".content").appendTo "body"
 
   render: =>
     @el.find(".preview").on "click", () =>
-      modalEl = $(".story-content[data-action-id='ritual']")
+      modalEl = $(".story-content[data-action-id='" + @action.id + "']")
       modalEl.on "hide.bs.modal", (e) =>
         iframe = modalEl.find("iframe")
         iframe.attr('src', iframe.attr('src')) if iframe.length > 0
