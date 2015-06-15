@@ -151,19 +151,49 @@ class window.App
   calculateStepScore: ->
     @calculateLevel()
 
-    @stepScore = @pain ** 2
+    @stepScore = (@pain * ((@level+1) * 2)) ** 2
+    # if @pain == 100
+    #   tmpDelta = (@stepScore ** 2) / 10
+    #   @stepScore += tmpDelta
+
+    # @stepScore = @stepScore ** (@level + 1)
+    # @stepScore = @stepScore * 
+
+    # @stepScore = @stepScore * (2 ** @level)
+
     if @pain == 100
-      @stepScore = @pain ** 3
+      @stepScore = @stepScore * 8
 
-    @stepScore = @stepScore * (@level + 1)
+    # console.log "Step #{@stepScore}"
 
-    @maxStepScore = @pain ** 3 * (@level + 1)
+    @maxStepScore = ((@pain * 3) ** 4) ** (@level + 1)
 
     @score += @stepScore
 
   calculateLevel: ->
-    @level = Math.round(Math.pow(Math.max(0, (@score - 100000) / 3), 1/10)) - 2
+    @level = Math.round(
+      Math.pow(
+        Math.max(0, (@score - 10000) / 3),
+        1/10
+      )
+    ) - 2
     @level = Math.max(@level, 0)
+
+    ls = [
+      0,             # не севастополец
+      300000,        # подпиндосник
+      30000000,      # аксенов
+      300000000,     # чалый
+      3000000000,    # меняйло
+      300000000000,  # путин
+      30000000000000 # говномидас
+    ]
+    ls = ls.reverse()
+    for v, i in ls
+      if @score >= v
+        @level = ls.length - i - 1
+        break
+    console.log "Level #{i}"
 
 
 

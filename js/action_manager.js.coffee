@@ -17,9 +17,6 @@ class window.ActionManager
     for i in [0..14]
       @takeActionFromStock()
 
-    @actions.push @actionById "ritual"
-    @actions.push @actionById "mass_ban"
-
     ActionManager.render()
 
   @takeActionFromStock: =>

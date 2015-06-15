@@ -36,13 +36,21 @@ class window.StoryView
   getTemplate: =>
     tplClassSelector = ".story-template." + @action.id
     tpl = $(tplClassSelector)
+
     if tpl.length > 0
       tpl = $(tpl[0]).clone()
     else
       tpl = $("<div></div>")
 
     unless tpl.find(".preview").length > 0
-      tpl.append($("<span class='preview'>#{@action.title}</span>"))
+      cnt = if (tpl.find(".modal-body").length > 0)
+        "<a>#{@action.title}</a>"
+      else
+        @action.title
+
+      tpl.append($("<span class='preview'>#{cnt}</span>"))
+
+    tpl.find(".preview > a").attr("href", "#").attr("onclick", "return false;")
 
     tpl
 

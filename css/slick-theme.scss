@@ -122,11 +122,17 @@ $slick-opacity-not-active: 0.25 !default;
     }
 }
 
-.slick-slide {
-  min-height: 60pt;
-  padding: 10pt;
-  span.preview {
-    font-size: 120%;
+.slick-slider {
+  padding: 2pt;
+
+  .slick-slide {
+    min-height: 60pt;
+    padding: 10pt;
+    // margin: 2pt 1pt 2pt 1pt;
+    margin: 0 2pt 0 2pt;
+    span.preview {
+      font-size: 120%;
+    }
   }
 }
 

@@ -2,8 +2,8 @@ window.actionsSrc = [
    {  
       "id":"shit-economic",
       "title":"Ввести плановую экономику",
-      "dpain":100,
-      "dmoral":100,
+      "dpain":8,
+      "dmoral":8,
       "intervalSteps":20,
       "timesLimit":1,
       "alive":true,
@@ -418,7 +418,7 @@ window.actionsSrc = [
       "disables":""
    },
    {  
-      "id":"bridge ",
+      "id":"bridge",
       "title":"Объявить о начале строительства моста",
       "dpain":0,
       "dmoral":15,
