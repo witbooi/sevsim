@@ -124,3 +124,21 @@
       - action_name = (File.basename(filename).sub ".html.haml", "")
       %div{ :class => "story-template #{action_name}", :"data-action-id" => action_name }
         = Haml::Engine.new(File.read(filename)).render
+
+
+
+  .modal.fade.finally-died
+    .modal-dialog.modal-lg
+      .modal-content
+        .modal-body
+          %h2 Твой севастополец не вытерпел унижений и умер, но не расстраивайся, ведь ты исполнил его мечту &mdash; он умер в России.
+          %img{ src: "/img/face/dead.png"}
+
+  .modal.fade.finally-fled
+    .modal-dialog.modal-lg
+      .modal-content
+        .modal-body
+          %h2 Твой севастополец не вытерпел унижений, забандерложился и свалил в фашистскую Укропию, где не кормят говном с ложки.
+          %img{ src: "/img/face/fled.png"}
+
+
