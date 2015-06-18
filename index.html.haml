@@ -48,31 +48,14 @@
 
   %body
 
-
-
-    -# / Button HTML (to Trigger Modal)
-    -# %a.btn.btn-lg.btn-primary{"data-toggle" => "modal", :href => "#myModal"} Launch Demo Modal
-    -# / Modal HTML
-    -# #myModal.modal.fade
-    -#   .modal-dialog.modal-lg
-    -#     .modal-content
-    -#       .modal-header
-    -#         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    -#         %h4.modal-title Confirmation
-    -#       .modal-body
-    -#         %p Do you want to save changes you made to document before closing?
-    -#         %p.text-warning
-    -#           %small If you don't save, your changes will be lost.
-    -#       .modal-footer
-    -#         %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
-    -#         %button.btn.btn-primary{:type => "button"} Save changes
-
-
     .container.wrap
       .row.header
         .row
-          %h1.title Симулятор севастопольца
-          %h3 По заказу Департамента унижения пидорашек Правительства Севастополя
+          .col-xs-3
+            %img.coat{src: "img/coat.svg"}
+          .col-xs-9
+            %h1.title Симулятор севастопольца
+            %h3 По заказу Департамента унижения пидорашек Правительства Севастополя
 
       .row.body
 
@@ -118,9 +101,9 @@
 
 
       .row.footer
-        .col-xs-2.coat
-          %img.coat{src: "img/coat.svg"}
-        .col-xs-7
+        .col-xs-3.proud
+          %img.proud{src: "img/gorjus2.png"}
+        .col-xs-9
           %div.madein
             Создано в&nbsp;
             %a{href: "http://www.interfax.ru/russia/437063", target: "_blank"}>цифровой долине 
@@ -135,8 +118,6 @@
             г. Севастополь (федерального значения)
             %br
             %a.eastern{href: "img/sut_igry.png"} &copy;&nbsp;2015
-        .col-xs-3.proud
-          %img.proud{src: "img/gorjus2.png"}
 
   .stories-templates
     - Dir.glob("templates/actions/*.html.haml").each do |filename|

@@ -22,14 +22,49 @@ class window.App
       subscriber.call @stepNum
 
   start: ->
+    @running = true
     @interval = setInterval @makeStep, 1000
     ActionManager.enableActions()
     @makeStep()
+    @setSoundTimeout()
+    @playSound()
 
   stop: ->
     @suspend()
 
+  setSoundTimeout: =>
+    secondsDelay = Math.floor(Math.random() * 120) + 60 # [60, 180]
+    @soundTimeout = setTimeout @playSoundAndRepeat, secondsDelay * 1000
+
+  playSoundAndRepeat: =>
+    if !@running
+      setTimeout @playSoundAndRepeat, 30 * 1000
+    else
+      @playSound()
+      @setSoundTimeout()
+
+  playSound: =>
+    console.log "PLAY SOUND"
+    sounds = [
+      "ура мы дома0000.mp3",
+      "3 оборона севастополя0000.mp3",
+      "особая категория снабжения0000.mp3",
+      "умереть в россии0000.mp3",
+      "богатый турист0000.mp3",
+      "зато не стреляют0000.mp3",
+      "а у хохлов еще хуже0000.mp3",
+      "только выиграли0000.mp3",
+      "талоны на очередь0000.mp3",
+      "меняйло в отставку0000.mp3",
+      "путин помоги0000.mp3"
+    ]
+    sound_index = Math.floor(@pain / (100/sounds.length))
+    aud         = new Audio
+    aud.src     = "audio/#{sounds[sound_index]}"
+    aud.play()
+
   suspend: ->
+    @running = false
     clearInterval @interval
     ActionManager.disableActions()
 
