@@ -24,6 +24,10 @@ class window.ScoreView
 
 
   render: =>
+    @el.find(".start-game").on "click", (e) =>
+      window.app.start()
+      $(this).hide()
+      
     @el.find("#pain .val").html  "#{Math.round app.pain} %"
     @el.find("#pain .val").css "color", "#" + @rainbows.percent.colourAt(app.pain)
 

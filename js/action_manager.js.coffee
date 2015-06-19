@@ -32,8 +32,9 @@ class window.ActionManager
         @deltas[type][i] = delta
 
   @getTemplate: =>
+      # <% disabled = a.available == true ? '' : 'disabled=\"disabled\"' %>
     s = """
-      <% disabled = a.available == true ? '' : 'disabled=\"disabled\"' %>
+      <% disabled = window.app.running ? '' : 'disabled=\"disabled\"' %>
         <% timesLeft = a.timesLeft() > 0 ? a.timesLeft() : '' %>
         <% btnClass = a.rank() == 'positive' ? 'btn-primary' : 'btn-danger' %>
         <% title = a.title.replace(/\\\"/g,'&quot;') %>

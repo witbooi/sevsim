@@ -27,10 +27,14 @@ class window.App
     ActionManager.enableActions()
     @makeStep()
     @setSoundTimeout()
-    @playSound()
 
   stop: ->
     @suspend()
+
+  suspend: ->
+    @running = false
+    clearInterval @interval
+    ActionManager.disableActions()
 
   setSoundTimeout: =>
     secondsDelay = Math.floor(Math.random() * 120) + 60 # [60, 180]
@@ -44,7 +48,6 @@ class window.App
       @setSoundTimeout()
 
   playSound: =>
-    console.log "PLAY SOUND"
     sounds = [
       "ура мы дома0000.mp3",
       "3 оборона севастополя0000.mp3",
@@ -62,12 +65,6 @@ class window.App
     aud         = new Audio
     aud.src     = "audio/#{sounds[sound_index]}"
     aud.play()
-
-  suspend: ->
-    @running = false
-    clearInterval @interval
-    ActionManager.disableActions()
-
 
   makeStep: =>
     @stepNum++
@@ -199,8 +196,6 @@ class window.App
     if @pain == 100
       @stepScore = @stepScore * 8
 
-    # console.log "Step #{@stepScore}"
-
     @maxStepScore = ((@pain * 3) ** 4) ** (@level + 1)
 
     @score += @stepScore
@@ -228,7 +223,6 @@ class window.App
       if @score >= v
         @level = ls.length - i - 1
         break
-    console.log "Level #{i}"
 
 
 
@@ -237,4 +231,7 @@ window.ONE_DAY = 86400000
 
 $ ->
   window.app = new App
-  app.start()
+  $(".start-game").click ->
+    $(this).hide()
+    app.start()
+    app.playSound()
