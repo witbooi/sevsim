@@ -37,7 +37,7 @@ class window.App
     ActionManager.disableActions()
 
   setSoundTimeout: =>
-    secondsDelay = Math.floor(Math.random() * 120) + 60 # [60, 180]
+    secondsDelay = Math.floor(Math.random() * 30) + 20 # [20, 50]
     @soundTimeout = setTimeout @playSoundAndRepeat, secondsDelay * 1000
 
   playSoundAndRepeat: =>
@@ -136,11 +136,11 @@ class window.App
       @gameOver()
 
   gameOver: ->
+    @stop()
     if @moral > 25
       $(".finally-died").modal("show")
     else
       $(".finally-fled").modal("show")
-    @stop()
 
   calculateStepTerpenium: ->
     if @pain == 100

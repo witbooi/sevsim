@@ -30,8 +30,9 @@ class window.StoryView
         iframe = modalEl.find("iframe")
         iframe.attr('src', iframe.attr('src')) if iframe.length > 0
         app.start()
-      modalEl.modal("show")
-      app.suspend()
+      if modalEl.length > 0
+        modalEl.modal("show")
+        app.suspend()
 
     @el
 

@@ -34,7 +34,7 @@ class window.ActionManager
   @getTemplate: =>
       # <% disabled = a.available == true ? '' : 'disabled=\"disabled\"' %>
     s = """
-      <% disabled = window.app.running ? '' : 'disabled=\"disabled\"' %>
+      <% disabled = (window.app.running && (a.available == true)) ? '' : 'disabled=\"disabled\"' %>
         <% timesLeft = a.timesLeft() > 0 ? a.timesLeft() : '' %>
         <% btnClass = a.rank() == 'positive' ? 'btn-primary' : 'btn-danger' %>
         <% title = a.title.replace(/\\\"/g,'&quot;') %>
