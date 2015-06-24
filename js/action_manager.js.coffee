@@ -32,7 +32,6 @@ class window.ActionManager
         @deltas[type][i] = delta
 
   @getTemplate: =>
-      # <% disabled = a.available == true ? '' : 'disabled=\"disabled\"' %>
     s = """
       <% disabled = (window.app.running && (a.available == true)) ? '' : 'disabled=\"disabled\"' %>
         <% timesLeft = a.timesLeft() > 0 ? a.timesLeft() : '' %>

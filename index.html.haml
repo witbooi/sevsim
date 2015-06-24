@@ -24,6 +24,7 @@
     %script{ :src => "js/lib/rainbowvis.js" }
 
     %script{ :src => "js/app.js" }
+    %script{ :src => "js/preload_images.js" }
     %script{ :src => "js/chart.js" }
     %script{ :src => "js/action_manager.js" }
     %script{ :src => "js/actions2.js" }
@@ -44,7 +45,6 @@
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       ga('create', 'UA-60755864-2', 'auto');
       ga('send', 'pageview');
-    :css
 
   %body
 
@@ -68,7 +68,7 @@
           .col-xs-9
             #chart-container
             %button.btn.btn-default.start-game
-              Начать симуляцию
+              Старт
 
           .col-xs-3.scores-container
             .row
@@ -143,5 +143,4 @@
         .modal-body
           %h2 Твой севастополец не вытерпел унижений, забандерложился и свалил в фашистскую Укропию, где не кормят говном с ложки.
           %img{ src: "/img/face/fled.png"}
-
 
