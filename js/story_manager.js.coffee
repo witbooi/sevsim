@@ -10,6 +10,7 @@ class window.StoriesView
       @carEl.slick
         slidesToShow: 4
         slidesToScroll: 1
+        infinite: false
 
   addCarouselAction: (actionView) =>
       @carEl.slick "slickAdd", actionView.render()
