@@ -302,7 +302,7 @@ window.actionsSrc = [
       "intervalSteps":0,
       "timesLimit":1,
       "alive":true,
-      "enables":"",
+      "enables":"gde_dengi_sooqa",
       "disables":""
    },
    {  

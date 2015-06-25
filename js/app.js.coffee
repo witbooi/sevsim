@@ -38,6 +38,7 @@ class window.App
 
   setSoundTimeout: =>
     secondsDelay = Math.floor(Math.random() * 30) + 20 # [20, 50]
+    clearTimeout @soundTimeout
     @soundTimeout = setTimeout @playSoundAndRepeat, secondsDelay * 1000
 
   playSoundAndRepeat: =>

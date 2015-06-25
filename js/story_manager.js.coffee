@@ -26,6 +26,7 @@ class window.StoryView
   render: =>
     @el.find(".preview").on "click", () =>
       modalEl = $(".story-content[data-action-id='" + @action.id + "']")
+      modalEl.off "hide.bs.modal"
       modalEl.on "hide.bs.modal", (e) =>
         iframe = modalEl.find("iframe")
         iframe.attr('src', iframe.attr('src')) if iframe.length > 0
