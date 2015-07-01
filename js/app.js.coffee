@@ -10,6 +10,20 @@ class window.App
     @view = new window.AppView
     @terpenium = 100
 
+  painSounds: [
+    "ура мы дома0000.mp3",
+    "3 оборона севастополя0000.mp3",
+    "особая категория снабжения0000.mp3",
+    "умереть в россии0000.mp3",
+    "богатый турист0000.mp3",
+    "зато не стреляют0000.mp3",
+    "а у хохлов еще хуже0000.mp3",
+    "только выиграли0000.mp3",
+    "талоны на очередь0000.mp3",
+    "меняйло в отставку0000.mp3",
+    "путин помоги0000.mp3"
+  ]
+
   subscribeStep: (fn) =>
     @stepSubscribers.push fn
 
@@ -49,22 +63,9 @@ class window.App
       @setSoundTimeout()
 
   playSound: =>
-    sounds = [
-      "ура мы дома0000.mp3",
-      "3 оборона севастополя0000.mp3",
-      "особая категория снабжения0000.mp3",
-      "умереть в россии0000.mp3",
-      "богатый турист0000.mp3",
-      "зато не стреляют0000.mp3",
-      "а у хохлов еще хуже0000.mp3",
-      "только выиграли0000.mp3",
-      "талоны на очередь0000.mp3",
-      "меняйло в отставку0000.mp3",
-      "путин помоги0000.mp3"
-    ]
-    sound_index = Math.floor(@pain / (100/sounds.length))
+    sound_index = Math.floor(@pain / (100/@painSounds.length))
     aud         = new Audio
-    aud.src     = "audio/#{sounds[sound_index]}"
+    aud.src     = "audio/#{@painSounds[sound_index]}"
     aud.play()
 
   makeStep: =>
@@ -133,13 +134,23 @@ class window.App
       @deltaTerpenium = 0
 
     if @terpenium <= 0
-      @terpenium      = 0
+      @terpenium = 0
       @gameOver()
 
   gameOver: ->
     @stop()
     if @moral > 25
-      $(".finally-died").modal("show")
+      modalEl = $(".finally-died")
+      iframe = modalEl.find("iframe")
+
+      ytSrc = "https://www.youtube.com/embed/" + iframe.attr("data-youtube-id")
+
+      modalEl.off "hide.bs.modal"
+      modalEl.on "hide.bs.modal", (e) =>
+        iframe.attr('src', ytSrc) if iframe.length > 0
+
+      iframe.attr('src', ytSrc + "?autoplay=1") if iframe.length > 0
+      modalEl.modal("show")
     else
       $(".finally-fled").modal("show")
 
@@ -152,11 +163,11 @@ class window.App
       return -0.25
 
     if @moral == 100
-      return +1.5
+      return +1.9
     if @moral >= 90
-      return +0.5
+      return +0.9
     if @moral >= 80
-      return +0.35
+      return +0.5
     if @moral == 0
       return -0.45
     0
@@ -194,6 +205,9 @@ class window.App
 
     # @stepScore = @stepScore * (2 ** @level)
 
+    level = @level + 4
+    @stepScore = (@pain ** 2) * (level ** 3)
+
     if @pain == 100
       @stepScore = @stepScore * 8
 
@@ -201,7 +215,19 @@ class window.App
 
     @score += @stepScore
 
+  levels: [
+    0,             # не севастополец
+    3500000,        # подпиндосник
+    100000000,      # аксенов
+    500000000,     # чалый
+    1000000000,    # меняйло
+    50000000000,  # путин
+    100000000000 # говномидас
+  ].reverse()
+
   calculateLevel: ->
+    lev = @level
+
     @level = Math.round(
       Math.pow(
         Math.max(0, (@score - 10000) / 3),
@@ -210,19 +236,11 @@ class window.App
     ) - 2
     @level = Math.max(@level, 0)
 
-    ls = [
-      0,             # не севастополец
-      300000,        # подпиндосник
-      30000000,      # аксенов
-      300000000,     # чалый
-      3000000000,    # меняйло
-      300000000000,  # путин
-      30000000000000 # говномидас
-    ]
-    ls = ls.reverse()
-    for v, i in ls
+    for v, i in @levels
       if @score >= v
-        @level = ls.length - i - 1
+        @level = @levels.length - i - 1
+        if @level != lev
+          console.log "NEW LEVEL #{@level} | #{v}"
         break
 
 
