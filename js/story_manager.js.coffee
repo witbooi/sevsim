@@ -8,7 +8,7 @@ class window.StoriesView
     $ =>
       @carEl = @el.find('.carousel')
       @carEl.slick
-        slidesToShow: 4
+        slidesToShow: 5
         slidesToScroll: 1
         infinite: false
 
@@ -74,7 +74,7 @@ class window.StoryManager
     story = new Story action
     @stories.push story
     @view.addCarouselAction story.view
-    @view.el.find(".slick-next").click()
+    @view.carEl.slick("slickNext")
 
 
 class window.Story

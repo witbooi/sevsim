@@ -198,10 +198,38 @@ body
 
   #stories
     background-color: #A9D0F5
-    margin-top: 5pt
-    .slick-slide
-      border: 1px solid
-      border-color: rgba(80, 80, 80, 0.2)
+    min-height: 4em
+    height: 4em
+    // margin-top: 5pt
+    .slick-slider
+      height: inherit !important
+      min-height: inherit !important
+      .slick-prev:before, .slick-next:before
+        color: #aaa
+
+      .slick-list
+        height: inherit !important
+        min-height: inherit !important
+
+        .slick-track
+          height: inherit !important
+          min-height: inherit !important
+
+          .slick-slide
+            border: 2px dashed
+            border-color: rgba(80, 80, 80, 0.2)
+            padding: 0 !important
+            // height: inherit !important
+            // min-height: inherit !important
+            min-height: 50px
+            height: 50px
+            a
+              font-size: 90%
+              // font-weight: normal
+              // color: navy
+              &:hover
+                text-decoration: none
+                border-bottom: 1px dotted
 
   .start-game
     position: relative
@@ -211,3 +239,4 @@ body
     font-size: 300%
     opacity: 0.8
     width: 10em
+

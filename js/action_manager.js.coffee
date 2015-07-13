@@ -19,8 +19,15 @@ class window.ActionManager
 
     ActionManager.render()
 
+  @availableActionsPop: =>
+    rs = _.filter @actionsStock, (act) -> act.alive
+    r = rs.pop()
+    i = @actionsStock.indexOf r
+    @actionsStock.splice i, 1
+    r
+
   @takeActionFromStock: =>
-    @actions.push @actionsStock.pop()
+    @actions.push @availableActionsPop()
     @render()
 
 
