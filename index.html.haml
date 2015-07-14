@@ -31,6 +31,7 @@
     %script{ :src => "js/actions_list.js"}
     %script{ :src => "js/app_view.js" }
     %script{ :src => "js/story_manager.js" }
+    %script{ :src => "js/helper.js" }
 
     %script{ :src => "//cdn.jsdelivr.net/jquery.slick/1.5.0/slick.min.js" }
     %link{ :rel => "stylesheet", :href => "css/slick.css" }
@@ -137,7 +138,24 @@
           %h2 Твой севастополец не вытерпел унижений и умер, но не расстраивайся, ведь ты исполнил его мечту &mdash; он умер в России.
           %iframe{ :"data-youtube-id" => "NNCz-2nxxGM", :width=>"560", :height=>"315", :src=>"https://www.youtube.com/embed/NNCz-2nxxGM?html5=1&autoplay=0", :frameborder=>"0", :allowfullscreen => true}
           %hr
-          %img.dead{ src: "/img/face/dead.png"}
+          .row
+            .col-sm-3
+            .col-sm-3
+              %img.dead{ src: "/img/face/dead.png"}
+            .col-sm-5.text-left
+              %p.result-info
+                Ты распилил
+                %span.score #
+                %span.score-word #
+                за
+                %span.days #
+                %span.days-word #
+                \.
+              %p.result-info
+                Достигнутый уровень &ndash;
+                %span.level
+            .col-sm-1
+
 
   .modal.fade.finally-fled
     .modal-dialog.modal-lg
@@ -146,5 +164,20 @@
           %h2 Твой севастополец не вытерпел унижений, забандерложился и свалил в фашистскую Укропию, где не кормят говном с ложки.
           %img{ src: "/img/face/fled_2.png"}
           %hr
-          %img.fled{ src: "/img/face/fled.png"}
+          .row
+            .col-sm-6.text-right
+              %img.fled{ src: "/img/face/fled.png"}
+            .col-sm-5.text-left
+              %p.result-info
+                Ты распилил
+                %span.score #
+                %span.score-word #
+                за
+                %span.days #
+                %span.days-word #
+                \.
+              %p.result-info
+                Достигнутый уровень &ndash;
+                %span.level
+            .col-sm-1
 

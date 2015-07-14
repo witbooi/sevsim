@@ -5,7 +5,8 @@ class window.App
     @chart = chartFactory 'chart-container'
     @moral = 100
     @pain = 0
-    @curDate = new Date(2014, 2, 16)
+    @startDate = new Date(2014, 2, 16)
+    @curDate = @startDate
     @stepSubscribers = []
     @view = new window.AppView
     @terpenium = 100

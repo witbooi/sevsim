@@ -12,6 +12,7 @@ class window.AppView
 class window.ScoreView
   constructor: (el) ->
     @el = el
+    @finalEl = $(".result-info")
     @rainbows =
       score: new Rainbow()
       percent: new Rainbow()
@@ -47,6 +48,13 @@ class window.ScoreView
     terpVal.addClass "negative" if app.deltaTerpenium < 0
     terpVal.html("#{app.terpenium.format 0, 3, "", "."} %")
 
+    @finalEl.find(".score").text("#{app.score.format 0, 3, " "}")
+    @finalEl.find(".level").text(levelTitle)
+    timeDiff = Math.abs(app.curDate - app.startDate)
+    diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24))
+    @finalEl.find(".days").text(diffDays)
+    @finalEl.find(".days-word").text(Helper.declOfNum(diffDays, ['день', 'дня', 'дней']))
+    @finalEl.find(".score-word").text(Helper.declOfNum(diffDays, ['рубль', 'рубля', 'рублей']))
 
   levels:
     [
