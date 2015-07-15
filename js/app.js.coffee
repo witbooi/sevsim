@@ -113,7 +113,7 @@ class window.App
       return -2
     if (@moral >= 80)
       return -1
-    Math.min(-(@moral - 40) / 100, -0.15)
+    Math.min(-(@moral - 40) / 100, -0.25)
 
   calculateDeltaMoral: =>
     deltaMoral = ActionManager.deltas.moral.shift()
@@ -121,9 +121,13 @@ class window.App
       return deltaMoral
     if @pain == 0
       return -1
-    if @moral >= 80
-      return -0.25
-    -0.1
+    if @pain == 100
+      return -0.8
+    if @pain >= 90
+      return 0.6
+    if @pain >= 80
+      return -0.45
+    -0.25
 
 
   updateTerpenium: ->
@@ -161,7 +165,7 @@ class window.App
     if @pain >= 90
       return -0.7
     if @pain >= 80
-      return -0.25
+      return -0.45
 
     if @moral == 100
       return +1.9
@@ -218,12 +222,12 @@ class window.App
 
   levels: [
     0,             # не севастополец
-    3500000,        # подпиндосник
-    100000000,      # аксенов
-    500000000,     # чалый
-    1000000000,    # меняйло
-    50000000000,  # путин
-    100000000000 # говномидас
+    5000000,        # подпиндосник
+    400000000,      # аксенов
+    1000000000,     # чалый
+    5000000000,    # меняйло
+    80000000000,  # путин
+    190000000000 # говномидас
   ].reverse()
 
   calculateLevel: ->
@@ -240,8 +244,6 @@ class window.App
     for v, i in @levels
       if @score >= v
         @level = @levels.length - i - 1
-        if @level != lev
-          console.log "NEW LEVEL #{@level} | #{v}"
         break
 
 

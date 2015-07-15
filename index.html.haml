@@ -145,12 +145,12 @@
             .col-sm-5.text-left
               %p.result-info
                 Ты распилил
-                %span.score #
-                %span.score-word #
+                %span.score
+                %span.score-word
                 за
-                %span.days #
-                %span.days-word #
-                \.
+                %span.days
+                = succeed '.' do
+                  %span.days-word
               %p.result-info
                 Достигнутый уровень &ndash;
                 %span.level
@@ -165,17 +165,18 @@
           %img{ src: "/img/face/fled_2.png"}
           %hr
           .row
-            .col-sm-6.text-right
+            .col-sm-3
+            .col-sm-3.text-right
               %img.fled{ src: "/img/face/fled.png"}
             .col-sm-5.text-left
               %p.result-info
                 Ты распилил
-                %span.score #
-                %span.score-word #
+                %span.score
+                %span.score-word
                 за
-                %span.days #
-                %span.days-word #
-                \.
+                %span.days
+                = succeed '.' do
+                  %span.days-word
               %p.result-info
                 Достигнутый уровень &ndash;
                 %span.level

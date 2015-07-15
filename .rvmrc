@@ -1,1 +1,2 @@
 rvm use 2.1@sevsim --create
+export PATH=$(npm bin):$PATH
