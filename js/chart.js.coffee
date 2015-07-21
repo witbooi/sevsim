@@ -25,15 +25,11 @@ window.chartFactory = (elId) ->
        allowDecimals: false
        startOnTick: false
        endOnTick: false
-       # minRange: 100
-       # min: 0
        type: "datetime"
        dateTimeLabelFormats:
          month: '%e. %b'
          year: '%b'
-       tickInterval: (3600 * 1000 * 24) * 7
-       # minorTickInterval: (3600 * 1000 * 24) * 1
-       # minPadding: 2
+       maxPadding: 0.1
 
      yAxis:
        [

@@ -189,12 +189,8 @@ class window.App
 
 
   updateChart: ->
-    @chart.series[0].addPoint [@curDate.getTime(), @moral], true, @stepNum > 15
+    @chart.series[0].addPoint [@curDate.getTime(), @moral], false, @stepNum > 15
     @chart.series[1].addPoint [@curDate.getTime(), @pain], true, @stepNum > 15
-
-    minEx = new Date(@curDate.getTime() - (ONE_DAY * 10))
-    maxEx = new Date(@curDate.getTime() + (ONE_DAY * 3))
-    @chart.xAxis[0].setExtremes(minEx, maxEx)
 
 
   calculateStepScore: ->
