@@ -3,6 +3,7 @@
   %head
     %meta{ :"http-equiv" => "content-type", :content => "text/html; charset=utf-8" } 
     %meta{ :name => "viewport", :content => "width=device-width,initial-scale=1" }
+    %meta{ :name => "twitter:title", :content => "Симулятор севастопольца" }
     %script{ :src => "https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" }
 
     %script{ :src => "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js" }
@@ -16,12 +17,16 @@
     %link{ :rel => "stylesheet", :href => "css/style.css" }
     %link{ :rel => "stylesheet", :href => "css/theme.css" }
     %link{ :rel => "stylesheet", :href => "css/pnotify.custom.min.css" }
+    %link{ :rel => "stylesheet", :href => "css/social-likes_flat.css" }
       
     %script{ :src => "js/lib/pnotify.custom.min.js" }
     %script{ :src => "http://code.highcharts.com/highcharts.js" }
     %script{ :src => "js/lib/tabletop.js" }
     %script{ :src => "js/lib/stuff.js" }
     %script{ :src => "js/lib/rainbowvis.js" }
+    %script{ :src => "js/lib/randomColor.js" }
+    %script{ :src => "js/lib/chardinjs.min.js" }
+    %script{ :src => "js/lib/social-likes.min.js" }
 
     %script{ :src => "js/app.js" }
     %script{ :src => "js/preload_images.js" }
@@ -36,6 +41,7 @@
     %script{ :src => "//cdn.jsdelivr.net/jquery.slick/1.5.0/slick.min.js" }
     %link{ :rel => "stylesheet", :href => "css/slick.css" }
     %link{ :rel => "stylesheet", :href => "css/slick-theme.css" }
+    %link{ :rel => "stylesheet", :href => "css/chardinjs.css" }
 
 
     %title Симулятор Севастопольца
@@ -44,10 +50,11 @@
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      ga('create', 'UA-60755864-2', 'auto');
+      ga('create', 'UA-60755864-2', 'auto'); // 3 for prod
       ga('send', 'pageview');
 
   %body
+    -# { :"data-intro" => "simulator", :"data-position" => "bottom" }
 
     .container.wrap
       .row.header
@@ -59,17 +66,20 @@
             %h3 По заказу Департамента унижения пидорашек Правительства Севастополя
 
       .row.body
-
         .row
           .col-xs-12
-            #actions
+            #actions{ :"data-intro" => "Используйте эти действия чтобы регулировать уровень унижения и духовности.", :"data-position" => "top" }
               #actions-container
 
-        .row
+        .row.game-field
           .col-xs-9
-            #chart-container
-            %button.btn.btn-default.start-game
-              Старт
+            #chart-container{ :"data-intro" => "Отслеживайте уровень унижения и духовности на графике", :"data-position" => "right" }
+            .btn-container
+              %button.btn.btn-default.start-game
+                Старт
+              %br
+              %button.btn.btn-default.guide
+                Как это работает?
 
           .col-xs-3.scores-container
             .row
@@ -84,7 +94,7 @@
 
                 %li#terpenium
                   %b.title Терпение
-                  %span.val 0
+                  %span.val{ :"data-intro" => "Контролируйте уровень терпения", :"data-position" => "right" } 0
 
                 %li#score
                   %b.title Распилено бабла
@@ -115,13 +125,21 @@
             %nobr
               %i
                 Департамента унижения
-                %a{href: "https://wiki.1chan.ru/wiki/%D0%9F%D0%B8%D0%B4%D0%BE%D1%80%D0%B0%D1%88%D0%BA%D0%B0_(%D0%BD%D0%B5_%D1%87%D0%B5%D0%BB%D0%BE%D0%B2%D0%B5%D0%BA)", target: "_blank"}пидорашек
+                -# %a{href: "https://wiki.1chan.ru/wiki/%D0%9F%D0%B8%D0%B4%D0%BE%D1%80%D0%B0%D1%88%D0%BA%D0%B0_(%D0%BD%D0%B5_%D1%87%D0%B5%D0%BB%D0%BE%D0%B2%D0%B5%D0%BA)", target: "_blank"}пидорашек
+                %a{href: "http://webcache.googleusercontent.com/search?q=cache:J89dnPNzqZUJ:1-chan.ru/wiki/%25D0%259F%25D0%25B8%25D0%25B4%25D0%25BE%25D1%2580%25D0%25B0%25D1%2588%25D0%25BA%25D0%25B0_(%25D0%25BD%25D0%25B5_%25D1%2587%25D0%25B5%25D0%25BB%25D0%25BE%25D0%25B2%25D0%25B5%25D0%25BA)+&cd=6&hl=en&ct=clnk&gl=ua", target: "_blank"}пидорашек
+                
             Правительства города Севастополь
             %br
             %br
-            г. Севастополь (федерального значения)
-            %br
             %a.eastern{href: "img/sut_igry.png"} &copy;&nbsp;2015
+            г. Севастополь (федерального значения)
+
+            %br
+            %br
+            .social-likes.social-likes_light
+              .facebook{ title: "Написать письмо Путину" } Facebook
+              .twitter{ title: "Написать письмо Чалому" } Twitter
+              .plusone{ title: "Написать письмо Меняйло" } Google+
 
   .stories-templates
     - Dir.glob("templates/actions/*.html.haml").each do |filename|
@@ -181,4 +199,9 @@
                 Достигнутый уровень &ndash;
                 %span.level
             .col-sm-1
+  .modal.fade.guide-content
+    .modal-dialog.modal-lg
+      .modal-content
+        .modal-body
+          Симулятор создан для тренировки сотрудников Правительства Севастополя. Ваша задача &mdash; умело унижая севастопольцев, распиливать бабло, при этом удерживая уровень терпения выше ноля. Для повышения терпения применяйте действия, повышающие духовность.
 

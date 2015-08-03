@@ -250,8 +250,12 @@ window.ONE_DAY = 86400000
 $ ->
   window.app = new App
   $(".start-game").click ->
-    $(this).hide()
+    $(this).parent('.btn-container').hide()
     app.start()
     app.playSound()
 
+  $(".guide").click ->
+    $('.guide-content').on "hide.bs.modal", (e) =>
+      $('body').chardinJs('toggle')
+    $('.guide-content').modal('show')
 

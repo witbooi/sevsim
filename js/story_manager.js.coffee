@@ -57,7 +57,10 @@ class window.StoryView
 
     tpl.find(".preview > a").attr("href", "#").attr("onclick", "return false;")
 
+    tpl.css("background-color", _.sample(StoryView.bgColors))
     tpl
+
+  @bgColors: randomColor({luminosity: 'light', count: 30})
 
 
 class window.StoryManager
