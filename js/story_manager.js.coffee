@@ -60,7 +60,7 @@ class window.StoryView
     tpl.css("background-color", _.sample(StoryView.bgColors))
     tpl
 
-  @bgColors: randomColor({luminosity: 'light', count: 30})
+  @bgColors: ["#f9d590", "#f9b489", "#b2ffd4", "#8effc5", "#e7f492", "#f1ffa5", "#ffc482", "#f9acb6", "#ef9bce", "#edf77e", "#95f9bc", "#f28b79", "#fca4d6", "#fcddc2", "#9af4c1", "#d0f489", "#bdf7f9", "#f2809a", "#f7b98a", "#e7ffa8", "#f9e57c", "#f2bdf9", "#a7eef2", "#c9f975", "#95f9d3", "#90f4ba", "#8afc9f", "#c4ceff", "#f7e891", "#eef497", "#8bf4b0", "#f29d6f", "#f7a0bd", "#ddf28c", "#f9f9a2", "#d6fc76", "#ccffa8", "#a9fcce", "#cfef8b", "#a5ddf7", "#dca1fc", "#eaf977", "#ccf9ff", "#c4f276", "#fcd3c4", "#f7ea94", "#bfedfc", "#fcceb3", "#f4e57f", "#f7e3a3", "#fcc4e9", "#ffeead", "#f9e39a", "#f2d2a2", "#f9bbd5", "#b8f799", "#d3ff8c", "#fcccba", "#ffa59b", "#cff48d", "#f2a796", "#a5ffdb", "#c3ffa8", "#f1ff87", "#e2c7fc", "#fce5bf", "#aedffc", "#e6f984", "#ffa6a3", "#ffed93", "#ffc375", "#e8ffaf", "#e0bdfc", "#f7cc94", "#ffc4d3", "#fce4c2", "#f7ffaf", "#c8ffaf", "#ffd2c9", "#f4b2e3", "#ffc5aa", "#b2ffdc", "#e6ffa8", "#d2ffad", "#fcb8bf", "#fcef9f", "#fffcbf", "#c5f282", "#cefca9", "#f9ed90", "#ff96d5", "#fc8fdd", "#fffbbf", "#dcc4fc", "#acdaf9", "#efd98f", "#d2c1ff", "#fcfa88"]
 
 
 class window.StoryManager
